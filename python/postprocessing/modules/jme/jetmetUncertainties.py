@@ -114,13 +114,16 @@ class jetmetUncertaintiesProducer(Module):
             self.jesUncertaintyInputFileName = "Regrouped_" + \
                 globalTag + "_UncertaintySources_" + jetType + ".txt"
         else:
-            # self.jesUncertaintyInputFileName = globalTag + "_UncertaintySources_" + jetType + ".txt"
-            self.jesGroupedFilePath = os.environ['CMSSW_BASE'] + "/src/PhysicsTools/NanoAODTools/data/jme/regrouped/"
-            self.jesGroupedUncertaintyFileName = "RegroupedV2_" + globalTag + "_UncertaintySources_" + jetType + ".txt"
-            self.jesGroupedUncertaintyFilePath = pjoin(self.jesGroupedFilePath, self.jesGroupedUncertaintyFileName)
-            # Copy the uncertainty source file to the tmp directory
-            shutil.copy(self.jesGroupedUncertaintyFilePath, pjoin(self.jesInputFilePath, self.jesGroupedUncertaintyFileName))
-       	    self.jesUncertaintyInputFileName = self.jesGroupedUncertaintyFileName
+            if self.isData:
+                self.jesUncertaintyInputFileName = globalTag + "_UncertaintySources_" + jetType + ".txt"
+            else:
+                # Using special regrouped uncertainties for MC
+                self.jesGroupedFilePath = os.environ['CMSSW_BASE'] + "/src/PhysicsTools/NanoAODTools/data/jme/regrouped/"
+                self.jesGroupedUncertaintyFileName = "RegroupedV2_" + globalTag + "_UncertaintySources_" + jetType + ".txt"
+                self.jesGroupedUncertaintyFilePath = pjoin(self.jesGroupedFilePath, self.jesGroupedUncertaintyFileName)
+                # Copy the uncertainty source file to the tmp directory
+                shutil.copy(self.jesGroupedUncertaintyFilePath, pjoin(self.jesInputFilePath, self.jesGroupedUncertaintyFileName))
+                self.jesUncertaintyInputFileName = self.jesGroupedUncertaintyFileName
 
         # read all uncertainty source names from the loaded file
         if jesUncertainties[0] in ["All", "Merged"]:
