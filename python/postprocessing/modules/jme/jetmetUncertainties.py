@@ -246,86 +246,86 @@ class jetmetUncertaintiesProducer(Module):
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.out = wrappedOutputTree
         self.out.branch("%s_pt_raw" % self.jetBranchName,
-                        "F", limitedPrecision=True,
+                        "F",
                         lenVar=self.lenVar)
         self.out.branch("%s_pt_nom" % self.jetBranchName,
-                        "F", limitedPrecision=True,
+                        "F",
                         lenVar=self.lenVar)
         self.out.branch("%s_mass_raw" % self.jetBranchName,
-                        "F", limitedPrecision=True,
+                        "F",
                         lenVar=self.lenVar)
         self.out.branch("%s_mass_nom" % self.jetBranchName,
-                        "F", limitedPrecision=True,
+                        "F",
                         lenVar=self.lenVar)
         self.out.branch("%s_corr_JEC" % self.jetBranchName,
-                        "F", limitedPrecision=True,
+                        "F",
                         lenVar=self.lenVar)
         self.out.branch("%s_corr_JER" % self.jetBranchName,
-                        "F", limitedPrecision=True,
+                        "F",
                         lenVar=self.lenVar)
 
-        self.out.branch("%s_T1_pt" % self.metBranchName, "F", limitedPrecision=True)
-        self.out.branch("%s_T1_phi" % self.metBranchName, "F", limitedPrecision=True)
+        self.out.branch("%s_T1_pt" % self.metBranchName, "F")
+        self.out.branch("%s_T1_phi" % self.metBranchName, "F")
 
         if not self.isData:
-            self.out.branch("%s_T1Smear_pt" % self.metBranchName, "F", limitedPrecision=True)
-            self.out.branch("%s_T1Smear_phi" % self.metBranchName, "F", limitedPrecision=True)
+            self.out.branch("%s_T1Smear_pt" % self.metBranchName, "F")
+            self.out.branch("%s_T1Smear_phi" % self.metBranchName, "F")
 
             for shift in ["Up", "Down"]:
                 for jerID in self.splitJERIDs:
                     self.out.branch("%s_pt_jer%s%s" %
                                     (self.jetBranchName, jerID, shift),
-                                    "F", limitedPrecision=True,
+                                    "F",
                                     lenVar=self.lenVar)
                     self.out.branch("%s_mass_jer%s%s" %
                                     (self.jetBranchName, jerID, shift),
-                                    "F", limitedPrecision=True,
+                                    "F",
                                     lenVar=self.lenVar)
                     if 'T1' in self.saveMETUncs:
                         self.out.branch(
                             "%s_T1_pt_jer%s%s" %
-                            (self.metBranchName, jerID, shift), "F", limitedPrecision=True)
+                            (self.metBranchName, jerID, shift), "F")
                         self.out.branch(
                             "%s_T1_phi_jer%s%s" %
-                            (self.metBranchName, jerID, shift), "F", limitedPrecision=True)
+                            (self.metBranchName, jerID, shift), "F")
                     if 'T1Smear' in self.saveMETUncs:
                         self.out.branch(
                             "%s_T1Smear_pt_jer%s%s" %
-                            (self.metBranchName, jerID, shift), "F", limitedPrecision=True)
+                            (self.metBranchName, jerID, shift), "F")
                         self.out.branch(
                             "%s_T1Smear_phi_jer%s%s" %
-                            (self.metBranchName, jerID, shift), "F", limitedPrecision=True)
+                            (self.metBranchName, jerID, shift), "F")
 
                 for jesUncertainty in self.jesUncertainties:
                     self.out.branch(
                         "%s_pt_jes%s%s" %
                         (self.jetBranchName, jesUncertainty, shift),
-                        "F", limitedPrecision=True,
+                        "F",
                         lenVar=self.lenVar)
                     self.out.branch(
                         "%s_mass_jes%s%s" %
                         (self.jetBranchName, jesUncertainty, shift),
-                        "F", limitedPrecision=True,
+                        "F",
                         lenVar=self.lenVar)
                     if 'T1' in self.saveMETUncs:
                         self.out.branch(
                             "%s_T1_pt_jes%s%s" %
-                            (self.metBranchName, jesUncertainty, shift), "F", limitedPrecision=True)
+                            (self.metBranchName, jesUncertainty, shift), "F")
                         self.out.branch(
                             "%s_T1_phi_jes%s%s" %
-                            (self.metBranchName, jesUncertainty, shift), "F", limitedPrecision=True)
+                            (self.metBranchName, jesUncertainty, shift), "F")
                     if 'T1Smear' in self.saveMETUncs:
                         self.out.branch(
                             "%s_T1Smear_pt_jes%s%s" %
-                            (self.metBranchName, jesUncertainty, shift), "F", limitedPrecision=True)
+                            (self.metBranchName, jesUncertainty, shift), "F")
                         self.out.branch(
                             "%s_T1Smear_phi_jes%s%s" %
-                            (self.metBranchName, jesUncertainty, shift), "F", limitedPrecision=True)
+                            (self.metBranchName, jesUncertainty, shift), "F")
 
                 self.out.branch(
-                    "%s_pt_unclustEn%s" % (self.metBranchName, shift), "F", limitedPrecision=True)
+                    "%s_pt_unclustEn%s" % (self.metBranchName, shift), "F")
                 self.out.branch(
-                    "%s_phi_unclustEn%s" % (self.metBranchName, shift), "F", limitedPrecision=True)
+                    "%s_phi_unclustEn%s" % (self.metBranchName, shift), "F")
 
         self.isV5NanoAOD = hasattr(inputTree, "Jet_muonSubtrFactor")
         print("nanoAODv5 or higher: " + str(self.isV5NanoAOD))
