@@ -43,6 +43,7 @@ jecTagsDATA = {
     '2018A': 'Autumn18_RunA_V19_DATA',
     '2018B': 'Autumn18_RunB_V19_DATA',
     '2018C': 'Autumn18_RunC_V19_DATA',
+    '2018Cv2': 'Summer19UL18_RunC_V5_HEMV1_DATA',
     '2018D': 'Autumn18_RunD_V19_DATA',
     'UL2017B': 'Summer19UL17_RunB_V5_DATA',
     'UL2017C': 'Summer19UL17_RunC_V5_DATA',
@@ -128,7 +129,7 @@ def createJMECorrector(isMC=True,
         else:
             jmeCorrections = lambda: jetmetUncertaintiesProducer(
                 era=dataYear,
-                archive=archiveTag_,
+                #archive=archiveTag_, #comment out needed to run
                 globalTag=jecTag_,
                 jesUncertainties=jmeUncert_,
                 jerTag=jerTag_,
