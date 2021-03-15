@@ -26,7 +26,8 @@ archiveTagsDATA = {
     '2017': 'Fall17_17Nov2017_V32_DATA',
     '2018': 'Autumn18_V19_DATA',
     'UL2017': 'Summer19UL17_V6_DATA',
-    'UL2018': 'Summer19UL18_V5_DATA'
+    'UL2018': 'Summer19UL18_V5_DATA',
+    'ULHEM2018': 'Summer19ULHEM18_V5_DATA',
 }
 
 jecTagsDATA = {
@@ -45,7 +46,6 @@ jecTagsDATA = {
     '2018A': 'Autumn18_RunA_V19_DATA',
     '2018B': 'Autumn18_RunB_V19_DATA',
     '2018C': 'Autumn18_RunC_V19_DATA',
-    '2018Cv2': 'Summer19UL18_RunC_V5_HEMV1_DATA',
     '2018D': 'Autumn18_RunD_V19_DATA',
     'UL2017B': 'Summer19UL17_RunB_V6_DATA',
     'UL2017C': 'Summer19UL17_RunC_V6_DATA',
@@ -56,6 +56,8 @@ jecTagsDATA = {
     'UL2018B': 'Summer19UL18_RunB_V5_DATA',
     'UL2018C': 'Summer19UL18_RunC_V5_DATA',
     'UL2018D': 'Summer19UL18_RunD_V5_DATA',
+    'ULHEM2018C': 'Summer19UL18_RunC_V5_HEMV1_DATA',
+    'ULHEM2018D': 'Summer19UL18_RunD_V5_HEMV1_DATA',
 }
 
 jerTagsMC = {
@@ -64,6 +66,7 @@ jerTagsMC = {
     '2018': 'Autumn18_V7b_MC',
     'UL2017': 'Summer19UL17_JRV2_MC',
     'UL2018': 'Summer19UL18_JRV2_MC',
+    'ULHEM2018': 'Summer19UL18_JRV2_MC',
 }
 
 # jet mass resolution: https://twiki.cern.ch/twiki/bin/view/CMS/JetWtagging
@@ -75,6 +78,7 @@ jmrValues = {
     '2018': [1.09, 1.14, 1.04],
     'UL2017': [1.00, 1.00, 1.00],  # placeholder
     'UL2018': [1.00, 1.00, 1.00],  # placeholder
+    'ULHEM2018': [1.00, 1.00, 1.00],  # placeholder
 }
 
 # jet mass scale
@@ -87,6 +91,7 @@ jmsValues = {
     '2018': [0.982, 0.978, 0.986],
     'UL2017': [1.000, 1.000, 1.000],  # placeholder
     'UL2018': [1.000, 1.000, 1.000],  # placeholder
+    'ULHEM2018': [1.000, 1.000, 1.000],  # placeholder
 }   
 
 
@@ -138,7 +143,7 @@ def createJMECorrector(isMC=True,
         else:
             jmeCorrections = lambda: jetmetUncertaintiesProducer(
                 era=dataYear,
-                #archive=archiveTag_, #comment out needed to run
+                archive=archiveTag_,
                 globalTag=jecTag_,
                 jesUncertainties=jmeUncert_,
                 jerTag=jerTag_,
